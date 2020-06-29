@@ -1,6 +1,8 @@
 # AmountToWords
 A cpp program which converts your currency amount from digits to words
 
+Following are the steps for Ubuntu.
+
 Make sure that you have GCC complier installed in your system.
 
 1. Clone this repository.
