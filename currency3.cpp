@@ -56,7 +56,64 @@ string wordconverter(long n)
 
 	say += numconverter((n % 100), "");
 
-	return say; 
+	return say;
+}
+
+
+string onesHindi[] = {"", "एक ", "दो ", "तीन ", "चार ", "पाँच ", "छह ", "सात ", "आठ ", "नौ ", "दस ", 
+    "ग्यारह ", "बारह ", "तेरह ", "चौदह  ", "पन्द्रह ", "सोलह ", "सत्रह ", "अठारह ", "उन्नीस ", "बीस ", 
+    "इक्कीस ", "बाईस ", "तेईस ", "चौबीस ", "पच्चीस ", "छब्बीस ", "सत्ताईस ", "अट्ठाईस ", "उनतीस ", "तीस ", 
+    "इकतीस ", "बत्तीस ", "तैंतीस ", "चौंतीस ", "पैंतीस ", "छत्तीस ", "सैंतीस ", "अड़तीस ", "उनतालीस ", "चालीस ", 
+    "इकतालीस ", "बयालीस ", "तैंतालीस ", "चौवालीस ", "पैंतालीस ", "छियालीस ", "सैंतालीस ", "अड़तालीस ", "उनचास ", "पचास ", 
+    "इक्यावन ", "बावन ", "तिरेपन ", "चौवन ", "पचपन ", "छप्पन ", "सत्तावन ", "अट्ठावन ", "उनसठ ", "साठ ", 
+    "इकसठ ", "बासठ ", "तिरेसठ ", "चौंसठ ", "पैंसठ ", "छियासठ ", "सड़सठ ", "अड़सठ ", "उनहत्तर ", "सत्तर ", 
+    "इकहत्तर ", "बहत्तर ", "तिहत्तर ", "चौहत्तर ", "पचहत्तर ", "छिहत्तर ", "सतहत्तर ", "अठहत्तर ", "उनासी ", "अस्सी ",
+    "इक्यासी ", "बयासी ", "तिरासी ", "चौरासी ", "पचासी ", "छियासी ", "सत्तासी ", "अट्ठासी ", "नवासी ", "नब्बे ",
+    "इक्यानबे ", "बानबे ", "तिरानबे ", "चौरानबे ", "पंचानबे ", "छियानबे ", "सत्तानबे ", "अट्ठानबे ", "निन्यानबे "};
+
+
+string numconverterHindi(int n, string s)
+{
+	string arr = "";
+
+	if (n > 99)
+		arr += onesHindi[n / 10] + onesHindi[n % 10];
+	else
+		arr += onesHindi[n];
+
+
+	if (n)
+		arr += s;
+
+	return arr;
+}
+
+
+
+string wordconverterHindi(long n)
+{
+
+	string say;
+
+
+	say += numconverterHindi((n / 10000000), "करोड़ ");
+
+
+	say += numconverterHindi(((n / 100000) % 100), "लाख ");
+
+
+	say += numconverterHindi(((n / 1000) % 100), "हज़ार ");
+
+
+	say += numconverterHindi(((n / 100) % 10), "सौ ");
+
+	if (n > 100 && n % 100)
+		say += "";
+
+
+	say += numconverterHindi((n % 100), "");
+
+	return say;
 }
 
 int main()
@@ -64,38 +121,49 @@ int main()
 
 	long double n;
 	char again;
+	char x;
 
 q:	cout<<"\nEnter the amount (max 9 digit)"<<endl<<"\t";
 	cin>>n;
-	/*long l;
-	int p,q;
-	l = n*100;
-	if (l%100 != 0)
+
+pt: cout<<"Enter Language (h)Hindi (e)English";
+	cin>>x;
+	if (x == 'h' || x == 'H')
 	{
-		q = l%100;
-	}*/
-	
-	cout<<wordconverter(n);
-	double x = n;
-	double y = fmod(x,1);
-	if(y!=0)
-		cout<<y*100<<"/100";
-	/*if(q!=0)
+		cout<<wordconverterHindi(n);
+		double x = n;
+		double y = fmod(x,1);
+		if(y!=0)
+			cout<<y*100<<"/100";
+	}
+
+	else if (x == 'e' || x == 'E')
 	{
-		cout<<q<<"/100";
-	}*/
+		cout<<wordconverter(n);
+		double x = n;
+		double y = fmod(x,1);
+		if(y!=0)
+			cout<<y*100<<"/100";
+	}
+
+	else 
+	{
+		cout<<"Wrong input ";
+		goto pt;
+	}
 
 	cout<<"\nWant to try for another amount ? (Y/N)"<<endl;
 	cin>>again;
 
 	if(again=='Y' || again=='y')
 	{
-	   goto q;
+	    cout<<"\n___________________________________________________";
+	    goto q;
 	}
 
 	else if(again=='N' || again=='n')
 	{
-	  cout<<"\n\t *Thank You*"<<endl;
+	  cout<<"\n___________________________Thank You_________________________"<<endl;
 	}
 
 	else
